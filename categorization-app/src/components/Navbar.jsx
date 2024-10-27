@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Search, ShoppingCart } from "lucide-react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [username, setUsername] = useState("");
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,7 +15,7 @@ function Navbar() {
 
       try {
         const response = await axios.get(
-          `http://localhost:5000/auth/get-username/${userId}`
+          `https://revispy-frontend-intern-assignment.onrender.com/auth/get-username/${userId}`
         );
         const name = response.data.username;
         setUsername(name);
@@ -24,10 +25,11 @@ function Navbar() {
     };
 
     fetchUsername();
-  }, []);
+  }, [location]);
 
   function logout() {
     localStorage.removeItem("userId");
+    setUsername("");
     navigate('/login');
   }
 
@@ -39,7 +41,7 @@ function Navbar() {
           <p key={index}>{str}</p>
         ))}
         {username && <p>Hi, {username}!</p>}
-        <button onClick={logout} className=" bg-black text-white px-2 text-sm rounded-sm font-bold">LOGOUT</button>
+        {username && <button onClick={logout} className=" bg-black text-white px-2 text-sm rounded-sm font-bold">LOGOUT</button>}
       </div>
       {/* SECOND LAYER */}
       <div className="flex justify-between items-baseline mx-7 py-3">

@@ -10,6 +10,7 @@ function SelectCategories() {
   const [data, setData] = useState([]);
   const [checkedItems, setCheckedItems] = useState({});
   const [itemOffset, setItemOffset] = useState(0);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const generateData = () => {
@@ -43,11 +44,10 @@ function SelectCategories() {
 
       try {
         const response = await axios.get(
-          `http://localhost:5000/auth/get-preferences/${userId}`
+          `https://revispy-frontend-intern-assignment.onrender.com/auth/get-preferences/${userId}`
         );
         const savedGenres = response.data.preferences;
         setCheckedItems(savedGenres);
-
       } catch (error) {
         console.error("Error fetching preferences:", error);
       }
@@ -89,9 +89,9 @@ function SelectCategories() {
         userId: userId,
         genres: selectedGenres,
       });
-      console.log(response.data.message);
+      setMessage(response.data.message);
     } catch (error) {
-      console.error("Error updating preferences:", error);
+      setMessage("Error updating preferences:", error);
     }
   };
 
@@ -121,6 +121,9 @@ function SelectCategories() {
             Save Preferences
           </button>
         </div>
+        {message && (
+          <p className="flex justify-center items-center text-sm pb-4">{message}</p>
+        )}
 
         <div className="flex justify-center">
           <ReactPaginate
