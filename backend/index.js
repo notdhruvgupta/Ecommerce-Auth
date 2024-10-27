@@ -7,7 +7,7 @@ import cors from "cors";
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 const app = express();
-app.use(cors({ origin: "https://revispy-task.netlify.app/", credentials: true }));
+app.use(cors({ origin: "https://revispy-task.netlify.app", credentials: true }));
 app.use(express.json());
 
 ConnectDB();
