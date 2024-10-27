@@ -1,5 +1,5 @@
 import { sendVerificationEmail } from "../middleware/Email.js";
-import { generateTokenAndSetCookies } from "../middleware/generateToken.js";
+import { generateTokenAndSetCookies } from "../middleware/GenerateToken.js";
 import { UserModel } from "../models/User.js";
 import bcryptjs from "bcryptjs";
 
