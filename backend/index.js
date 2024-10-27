@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import AuthRoutes from "./routes/Auth.routes.js";
+import AuthRoutes from "./routes/auth.routes.js";
 import ConnectDB from "./lib/db.js";
 import cors from "cors";
 
